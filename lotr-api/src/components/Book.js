@@ -10,6 +10,7 @@ const Book = (props) => {
   const accessToken = 'fkvjn1Y4mQl3SasgncEO';
 
   const getBookRequest = (bookUrl) => {
+    console.log(`sending HTTP request to ${bookUrl}`);
     return axios
       .get(bookUrl, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -20,6 +21,7 @@ const Book = (props) => {
   };
 
   const getChapterRequest = (chapterUrl) => {
+    console.log(`sending HTTP request to ${chapterUrl}`);
     return axios
       .get(chapterUrl, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -33,11 +35,9 @@ const Book = (props) => {
     setIsLoading(true);
 
     const bookUrl = `https://the-one-api.herokuapp.com/v1/book/${id}`;
-    console.log(`sending HTTP request to ${bookUrl}`);
     const bookRequest = getBookRequest(bookUrl);
 
     const chapterUrl = `${bookUrl}/chapter`;
-    console.log(`sending HTTP request to ${chapterUrl}`);
     const chapterRequest = getChapterRequest(chapterUrl);
 
     axios.all([bookRequest, chapterRequest]).then(() => setIsLoading(false));
