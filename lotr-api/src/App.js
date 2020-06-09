@@ -1,5 +1,7 @@
 import React from "react";
 import "./css/App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Characters from "./components/Characters";
 import Header from "./components/layout/Header";
 import MainPage from "./components/pages/MainPage";
 import styled from "styled-components";
@@ -26,7 +28,11 @@ function App() {
             </React.Fragment>
           )}
         />
-        <Main></Main>
+        <Main>
+          <Route path="/characters">
+            <Characters />
+          </Route>
+        </Main>
       </Router>
     </div>
   );
