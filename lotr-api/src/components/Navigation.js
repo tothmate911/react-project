@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import axios from "axios";
 
 const DropdownContent = styled.div`
   display: none;
@@ -37,29 +38,55 @@ const Button = styled.div`
 `;
 
 export default function Navigation() {
+  const [books, setBooks] = useState([]);
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://the-one-api.herokuapp.com/v1/book", {
+        headers: {
+          Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+        },
+      })
+      .then((response) => setBooks(response.data.docs));
+  });
+  console.log(books);
+  const bookList = books.map((item) => (
+    <Link key={item.id} to={"/book/" + item.id}>
+      {item.name}
+    </Link>
+  ));
+
+  useEffect(() => {
+    axios
+      .get("https://the-one-api.herokuapp.com/v1/movie", {
+        headers: {
+          Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+        },
+      })
+      .then((response) => setMovies(response.data.docs));
+  });
+  console.log(movies);
+  const movieList = movies.map((item) => (
+    <Link key={item.id} to={"/movie/" + item.id}>
+      {item.name}
+    </Link>
+  ));
+
   return (
     <div>
       <Router>
         <Button>
           <span>Books</span>
-          <DropdownContent>
-            <Route path="/">
-              <Link to="/">Dropdown here</Link>
-              <Link to="/">Dropdown here</Link>
-            </Route>
-          </DropdownContent>
+          <DropdownContent>{bookList}</DropdownContent>
         </Button>
         <Button>
           <span>Movies</span>
-          <DropdownContent>
-            <Route path="/">
-              <Link to="/">Dropdown here</Link>
-            </Route>
-          </DropdownContent>
+          <DropdownContent>{movieList}</DropdownContent>
         </Button>
         <Button>
           <span>Characters</span>
-          <Route></Route>
+          <Route path="/characters"></Route>
         </Button>
       </Router>
     </div>
