@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 function Characters() {
     const [characters, setCharacters] = useState([])
@@ -28,14 +29,14 @@ function Characters() {
     }
 
     const iter = characters.map((item) => (
-                <div style={cardStyle}>
-                    {item.name} <br/>
-                    {item.birth} <br/>
-                    {item.death} <br/>
-                    {item.gender} <br/>
-                    {item.race} <br/>
-                    {item.wikiUrl}
-                </div>
+            <div style={cardStyle}>
+                {item.name} <br/>
+                {item.birth} <br/>
+                {item.death} <br/>
+                {item.gender} <br/>
+                {item.race} <br/>
+                <a href={item.wikiUrl} target="_blank">{item.wikiUrl}</a>
+            </div>
             //<li key={item.id}>{item.name}</li>
         )
     )
