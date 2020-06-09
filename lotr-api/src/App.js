@@ -1,7 +1,9 @@
 import React from "react";
 import "./css/App.css";
 import Header from "./components/layout/Header";
+import MainPage from "./components/pages/MainPage";
 import styled from "styled-components";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const Main = styled.div`
   margin-top: 20px;
@@ -13,8 +15,19 @@ const Main = styled.div`
 function App() {
   return (
     <div>
-      <Header />
-      <Main></Main>
+      <Router>
+        <Header />
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <React.Fragment>
+              <MainPage />
+            </React.Fragment>
+          )}
+        />
+        <Main></Main>
+      </Router>
     </div>
   );
 }
