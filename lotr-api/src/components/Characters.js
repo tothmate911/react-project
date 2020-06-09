@@ -11,10 +11,18 @@ function Characters() {
             }
         })
             .then(response => setCharacters(response.data.docs))
-    })
-    console.log(characters)
+    },[])
+
     const iter = characters.map((item) => (
-            <li key={item.id}>{item.name}</li>
+            <div>
+                {item.name} <br/>
+                {item.birth} <br/>
+                {item.death} <br/>
+                {item.gender} <br/>
+                {item.race} <br/>
+                {item.wikiUrl}
+            </div>
+            //<li key={item.id}>{item.name}</li>
         )
     )
 
