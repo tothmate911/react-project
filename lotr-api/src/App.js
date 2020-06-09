@@ -1,13 +1,11 @@
 import React from "react";
 import "./css/App.css";
-import Navigation from "./components/Navigation";
+import Header from "./components//layout/Header";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Navigation />
-      </header>
+      <Header />
     </div>
   );
 }
