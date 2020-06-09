@@ -1,22 +1,20 @@
 import React from "react";
 import "./css/App.css";
+import Header from "./components/layout/Header";
+import styled from "styled-components";
+
+const Main = styled.div`
+  margin-top: 20px;
+  margin-left: 20%;
+  margin-right: 20%;
+  text-align: left;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Main></Main>
     </div>
   );
 }
