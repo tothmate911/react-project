@@ -5,7 +5,6 @@ import Characters from "./components/Characters";
 import Header from "./components/layout/Header";
 import MainPage from "./components/pages/MainPage";
 import styled from "styled-components";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const Main = styled.div`
   margin-top: 20px;
@@ -29,9 +28,15 @@ function App() {
           )}
         />
         <Main>
-          <Route path="/characters">
-            <Characters />
-          </Route>
+          <Route
+            exact
+            path="/characters"
+            render={(props) => (
+              <React.Fragment>
+                <Characters />
+              </React.Fragment>
+            )}
+          />
         </Main>
       </Router>
     </div>
