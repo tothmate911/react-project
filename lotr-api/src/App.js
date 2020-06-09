@@ -17,11 +17,11 @@ function App() {
     return (
         <div className="App">
             <Router>
-            <Header />
-            <Main></Main>
+                <Header/>
+                <Main>
+                </Main>
                 <Route path='/characters'>
-                    <div>This is the characters route!!!!</div>
-                    <Characters />
+                    <Characters/>
                 </Route>
             </Router>
         </div>
