@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const NavBar = styled.div`
@@ -89,7 +89,6 @@ export default function Navigation() {
   ));
 
   return (
-    <Router>
       <NavBar>
         <Button>
           <ButtonTitle>BOOKS</ButtonTitle>
@@ -105,6 +104,5 @@ export default function Navigation() {
           </Button>
         </Link>
       </NavBar>
-    </Router>
   );
 }

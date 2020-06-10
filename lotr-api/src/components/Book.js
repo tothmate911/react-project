@@ -49,14 +49,14 @@ const Book = (props) => {
   useEffect(() => {
     console.log(id);
     fetchData();
-  }, [window.location.href]);
+  }, [id]);
 
   // let content = <h3>loading book...</h3>;
 
   // if (!isLoading) {
   let content = (
     <div>
-      <h2>{book.name}</h2>
+      <h2>{book.name} {id}</h2>
       <p>Number of chapters: {chapters.length}</p>
     </div>
   );
