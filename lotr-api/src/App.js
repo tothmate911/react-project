@@ -4,7 +4,7 @@ import Header from './components/layout/Header';
 import styled from 'styled-components';
 import Book from './components/Book';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Main = styled.div`
   margin-top: 20px;
@@ -16,12 +16,12 @@ const Main = styled.div`
 const App = (props) => {
   return (
     <div>
-      <Header />
-      <Main>
-        <Router>
+      <Router>
+        <Header />
+        <Main>
           <Route path="/book/:id" component={Book} />
-        </Router>
-      </Main>
+        </Main>
+      </Router>
     </div>
   );
 };
