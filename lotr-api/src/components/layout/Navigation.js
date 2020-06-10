@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const NavBar = styled.div`
@@ -76,7 +76,7 @@ export default function Navigation() {
   });
   console.log(books);
   const bookList = books.map((item) => (
-    <Link key={item.id} to={"/book/" + item.id}>
+    <Link key={item._id} to={"/book/" + item._id}>
       {item.name}
     </Link>
   ));
@@ -92,7 +92,7 @@ export default function Navigation() {
   });
   console.log(movies);
   const movieList = movies.map((item) => (
-    <Link key={item.id} to={"/movie/" + item.id}>
+    <Link key={item._id} to={"/movie/" + item._id}>
       {item.name}
     </Link>
   ));
