@@ -6,7 +6,7 @@ import Header from './components/layout/Header';
 import MainPage from './components/pages/MainPage';
 import Movie from './components/pages/Movie';
 import styled from 'styled-components';
-import Book from './components/Book';
+import Book from './components/pages/Book';
 
 const Main = styled.div`
   margin-top: 20px;
