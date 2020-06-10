@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "./logo.svg";
-import Navigation from "../Navigation";
+import Navigation from "./Navigation";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   background-color: white;
@@ -31,7 +32,9 @@ function Header() {
     <div className="Header">
       <HeaderContainer>
         <LogoContainer>
-          <Logo src={logo} alt="logo" />
+          <Link to="/">
+            <Logo src={logo} alt="logo" />
+          </Link>
         </LogoContainer>
         <Navigation />
       </HeaderContainer>
