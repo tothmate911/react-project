@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const NavBar = styled.div`
   height: 120px;
   background-color: white;
   margin-right: 60px;
-`;
-
-const NavLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  &:hover {
-    color: gray;
-    text-decoration: none;
-  }
 `;
 
 const DropdownContent = styled.div`
@@ -62,56 +53,56 @@ const ButtonTitle = styled.div`
 `;
 
 export default function Navigation() {
-    const [books, setBooks] = useState([]);
-    const [movies, setMovies] = useState([]);
+  const [books, setBooks] = useState([]);
+  const [movies, setMovies] = useState([]);
 
-    useEffect(() => {
-        axios
-            .get("https://the-one-api.herokuapp.com/v1/book", {
-                headers: {
-                    Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
-                },
-            })
-            .then((response) => setBooks(response.data.docs));
-    }, []);
-    console.log(books);
-    const bookList = books.map((item) => (
-        <Link key={item.id} to={"/book/" + item.id}>
-            {item.name}
-        </Link>
-    ));
+  useEffect(() => {
+    axios
+      .get('https://the-one-api.herokuapp.com/v1/book', {
+        headers: {
+          Authorization: 'Bearer pmF8BDZT97okBAtf7_Ui',
+        },
+      })
+      .then((response) => setBooks(response.data.docs));
+  }, []);
+  console.log(books);
+  const bookList = books.map((item) => (
+    <Link key={item._id} to={'/book/' + item._id}>
+      {item.name}
+    </Link>
+  ));
 
-    useEffect(() => {
-        axios
-            .get("https://the-one-api.herokuapp.com/v1/movie", {
-                headers: {
-                    Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
-                },
-            })
-            .then((response) => setMovies(response.data.docs));
-    }, []);
-    console.log(movies);
-    const movieList = movies.map((item) => (
-        <Link key={item.id} to={"/movie/" + item.id}>
-            {item.name}
-        </Link>
-    ));
+  useEffect(() => {
+    axios
+      .get('https://the-one-api.herokuapp.com/v1/movie', {
+        headers: {
+          Authorization: 'Bearer pmF8BDZT97okBAtf7_Ui',
+        },
+      })
+      .then((response) => setMovies(response.data.docs));
+  }, []);
+  console.log(movies);
+  const movieList = movies.map((item) => (
+    <Link key={item._id} to={'/movie/' + item._id}>
+      {item.name}
+    </Link>
+  ));
 
   return (
-    <NavBar>
-      <Button>
-        <ButtonTitle>BOOKS</ButtonTitle>
-        <DropdownContent>{bookList}</DropdownContent>
-      </Button>
-      <Button>
-        <ButtonTitle>MOVIES</ButtonTitle>
-        <DropdownContent>{movieList}</DropdownContent>
-      </Button>
-      <Button>
-        <NavLink to="/characters">
-          <ButtonTitle>CHARACTERS</ButtonTitle>
-        </NavLink>
-      </Button>
-    </NavBar>
+      <NavBar>
+        <Button>
+          <ButtonTitle>BOOKS</ButtonTitle>
+          <DropdownContent>{bookList}</DropdownContent>
+        </Button>
+        <Button>
+          <ButtonTitle>MOVIES</ButtonTitle>
+          <DropdownContent>{movieList}</DropdownContent>
+        </Button>
+        <Link to="/characters">
+          <Button>
+            <ButtonTitle>CHARACTERS</ButtonTitle>
+          </Button>
+        </Link>
+      </NavBar>
   );
 }
