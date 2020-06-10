@@ -28,6 +28,8 @@ function Characters() {
     borderRadius: "5px",
   };
 
+  const sortedList = characters.sort()
+
   const iter = characters.map((item) => (
     <div style={cardStyle}>
       {item.name} <br />
