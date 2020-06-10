@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import axios from 'axios';
 
 const NavBar = styled.div`
   height: 120px;
@@ -58,39 +58,39 @@ export default function Navigation() {
 
   useEffect(() => {
     axios
-      .get("https://the-one-api.herokuapp.com/v1/book", {
+      .get('https://the-one-api.herokuapp.com/v1/book', {
         headers: {
-          Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+          Authorization: 'Bearer pmF8BDZT97okBAtf7_Ui',
         },
       })
       .then((response) => setBooks(response.data.docs));
-  });
+  }, []);
   console.log(books);
   const bookList = books.map((item) => (
-    <Link key={item.id} to={"/book/" + item.id}>
+    <Link key={item._id} to={'/book/' + item._id}>
       {item.name}
     </Link>
   ));
 
   useEffect(() => {
     axios
-      .get("https://the-one-api.herokuapp.com/v1/movie", {
+      .get('https://the-one-api.herokuapp.com/v1/movie', {
         headers: {
-          Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+          Authorization: 'Bearer pmF8BDZT97okBAtf7_Ui',
         },
       })
       .then((response) => setMovies(response.data.docs));
-  });
+  }, []);
   console.log(movies);
   const movieList = movies.map((item) => (
-    <Link key={item.id} to={"/movie/" + item.id}>
+    <Link key={item._id} to={'/movie/' + item._id}>
       {item.name}
     </Link>
   ));
 
   return (
-    <NavBar>
-      <Router>
+    <Router>
+      <NavBar>
         <Button>
           <ButtonTitle>BOOKS</ButtonTitle>
           <DropdownContent>{bookList}</DropdownContent>
@@ -99,11 +99,12 @@ export default function Navigation() {
           <ButtonTitle>MOVIES</ButtonTitle>
           <DropdownContent>{movieList}</DropdownContent>
         </Button>
-        <Button>
-          <ButtonTitle>CHARACTERS</ButtonTitle>
-          <Route path="/characters"></Route>
-        </Button>
-      </Router>
-    </NavBar>
+        <Link to="/characters">
+          <Button>
+            <ButtonTitle>CHARACTERS</ButtonTitle>
+          </Button>
+        </Link>
+      </NavBar>
+    </Router>
   );
 }

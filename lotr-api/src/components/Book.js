@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Book = (props) => {
-  const id = props.location.id;
+  const id = props.match.params.id;
+
   const [book, setBook] = useState([]);
   const [chapters, setChapters] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const accessToken = 'fkvjn1Y4mQl3SasgncEO';
 
