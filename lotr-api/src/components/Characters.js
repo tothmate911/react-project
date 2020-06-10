@@ -28,7 +28,7 @@ function Characters() {
     borderRadius: "5px",
   };
 
-  const sortedList = characters.sort()
+  const sortedList = characters.sort((a,b) => (a.name > b.name) ? 1: -1)
 
   const iter = characters.map((item) => (
     <div style={cardStyle}>
