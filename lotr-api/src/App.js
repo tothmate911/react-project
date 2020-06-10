@@ -3,6 +3,7 @@ import './css/App.css';
 import Header from './components/layout/Header';
 import styled from 'styled-components';
 import Book from './components/Book';
+import Characters from "./components/Characters";
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -20,6 +21,7 @@ const App = (props) => {
         <Header />
         <Main>
           <Route path="/book/:id" component={Book} />
+          <Route exact path='/characters' component={Characters}/>
         </Main>
       </Router>
     </div>
