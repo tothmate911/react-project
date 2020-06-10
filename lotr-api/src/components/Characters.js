@@ -28,25 +28,34 @@ function Characters() {
         borderRadius: "5px",
     };
 
-    function sort(event) {
-        if(event.target.value === 'ascending'){
-            characters.sort((a,b) => (a.name > b.name) ? 1: -1)
+    const sorter = (event) => {
+        if (event.target.value === 'ascending') {
+            characters.sort((a, b) => (a.name > b.name) ? 1 : -1)
             event.target.value = 'descending'
-        }else{
-            characters.sort((a,b) => (a.name < b.name) ? 1: -1)
+        } else {
+            characters.sort((a, b) => (a.name < b.name) ? 1 : -1)
             event.target.value = 'ascending'
         }
     }
 
+    /*function sort(event) {
+        if (event.target.value === 'ascending') {
+            characters.sort((a, b) => (a.name > b.name) ? 1 : -1)
+            event.target.value = 'descending'
+        } else {
+            characters.sort((a, b) => (a.name < b.name) ? 1 : -1)
+            event.target.value = 'ascending'
+        }
+    }*/
+
     const handleQuery = (event) => {
-        const fieldInput = event.target.value
         if (event.key === 'Enter') {
-            filterCharacter(fieldInput)
+            filterCharacter(event.target.value)
         }
     }
 
-    function filterCharacter(characterName) {
-        const filteredChar = characters.filter(item => item.name === characterName)
+    function filterCharacter(fieldInput) {
+        const filteredChar = characters.filter(item => item.name === fieldInput)
         setCharacters(filteredChar)
     }
 
@@ -64,7 +73,7 @@ function Characters() {
     ));
 
     return <React.Fragment>
-        <button onClick={sort} value={'ascending'}>Sort by name</button>
+        <button onClick={sorter} value={'ascending'}>Sort by name</button>
         <input onKeyPress={handleQuery} name='inputField' type="text" placeholder='Search...' defaultValue={''}/>
         <div style={flexContainerStyle}>
             {listCharacters}
