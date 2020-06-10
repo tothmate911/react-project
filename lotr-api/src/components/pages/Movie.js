@@ -18,13 +18,6 @@ const Icon = styled.span`
   margin-right: 10px;
 `;
 
-const Detail = styled.div`
-  width: 600px;
-  height: 200px;
-  color: white;
-  background-color: #f5eacf;
-`;
-
 const Movie = (props) => {
   const { id } = useParams();
   console.log(id);
@@ -40,19 +33,14 @@ const Movie = (props) => {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((res) => {
-        console.log("hhhhhh" + res.data);
         setMovie(res.data);
       });
   };
 
-  const fetchData = () => {
-    const movieUrl = `https://the-one-api.herokuapp.com/v1/movie/${id}`;
-    const movieRequest = getMovieRequest(movieUrl);
-  };
-
   useEffect(() => {
     console.log(id);
-    fetchData();
+    const movieUrl = `https://the-one-api.herokuapp.com/v1/movie/${id}`;
+    const movieRequest = getMovieRequest(movieUrl);
   }, [id]);
 
   return (
