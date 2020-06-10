@@ -61,7 +61,7 @@ const Movie = (props) => {
       <Border>
         <p>
           <Icon>
-            <i class="fas fa-check"></i>
+            <i class="fas fa-star"></i>
           </Icon>
           Academy Award Nominations: {movie.academyAwardNominations}
         </p>
