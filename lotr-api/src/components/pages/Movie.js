@@ -1,0 +1,97 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+
+const Border = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-left-style: solid !important;
+  border-left: 5px;
+  border-color: #555;
+  color: #555;
+  padding-left: 15px;
+`;
+
+const Icon = styled.span`
+  font-size: 1.4em;
+  margin-right: 10px;
+`;
+
+const Detail = styled.div`
+  width: 600px;
+  height: 200px;
+  color: white;
+  background-color: #f5eacf;
+`;
+
+const Movie = (props) => {
+  const { id } = useParams();
+  console.log(id);
+
+  const [movie, setMovie] = useState([]);
+
+  const accessToken = "fkvjn1Y4mQl3SasgncEO";
+
+  const getMovieRequest = (movieUrl) => {
+    console.log(`sending HTTP request to ${movieUrl}`);
+    return axios
+      .get(movieUrl, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((res) => {
+        console.log("hhhhhh" + res.data);
+        setMovie(res.data);
+      });
+  };
+
+  const fetchData = () => {
+    const movieUrl = `https://the-one-api.herokuapp.com/v1/movie/${id}`;
+    const movieRequest = getMovieRequest(movieUrl);
+  };
+
+  useEffect(() => {
+    console.log(id);
+    fetchData();
+  }, [id]);
+
+  return (
+    <React.Fragment>
+      <h1>{movie.name}</h1>
+      <Border>
+        <p>
+          <Icon>
+            <i class="fas fa-check"></i>
+          </Icon>
+          Academy Award Nominations: {movie.academyAwardNominations}
+        </p>
+        <p>
+          <Icon>
+            <i class="fas fa-trophy"></i>
+          </Icon>
+          Academy Award Wins: {movie.academyAwardWins}
+        </p>
+        <p>
+          <Icon>
+            <i class="fas fa-money-bill"></i>
+          </Icon>
+          Box Office Revenue: {movie.boxOfficeRevenueInMillions} millions
+        </p>
+        <p>
+          <Icon>
+            <i class="fas fa-wallet"></i>
+          </Icon>
+          Budget: {movie.budgetInMillions} millions
+        </p>
+        <p>
+          <Icon>
+            <i class="fas fa-clock"></i>
+          </Icon>
+          Runtime: {movie.runtimeInMinutes} minutes
+        </p>
+      </Border>
+    </React.Fragment>
+  );
+};
+
+export default Movie;
