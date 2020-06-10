@@ -1,13 +1,21 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import {BrowserRouter as Router, Link, Route} from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import axios from "axios";
-import Characters from "./Characters";
 
 const NavBar = styled.div`
   height: 120px;
   background-color: white;
   margin-right: 60px;
+`;
+
+const NavLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  &:hover {
+    color: gray;
+    text-decoration: none;
+  }
 `;
 
 const DropdownContent = styled.div`
@@ -89,21 +97,21 @@ export default function Navigation() {
         </Link>
     ));
 
-    return (
-        <NavBar>
-            <Router>
-                <Button>
-                    <ButtonTitle>BOOKS</ButtonTitle>
-                    <DropdownContent>{bookList}</DropdownContent>
-                </Button>
-                <Button>
-                    <ButtonTitle>MOVIES</ButtonTitle>
-                    <DropdownContent>{movieList}</DropdownContent>
-                </Button>
-                <Button>
-                    <ButtonTitle>CHARACTERS</ButtonTitle>
-                </Button>
-            </Router>
-        </NavBar>
-    );
+  return (
+    <NavBar>
+      <Button>
+        <ButtonTitle>BOOKS</ButtonTitle>
+        <DropdownContent>{bookList}</DropdownContent>
+      </Button>
+      <Button>
+        <ButtonTitle>MOVIES</ButtonTitle>
+        <DropdownContent>{movieList}</DropdownContent>
+      </Button>
+      <Button>
+        <NavLink to="/characters">
+          <ButtonTitle>CHARACTERS</ButtonTitle>
+        </NavLink>
+      </Button>
+    </NavBar>
+  );
 }
