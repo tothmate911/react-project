@@ -30,23 +30,17 @@ function Characters() {
 
     const sorter = (event) => {
         if (event.target.value === 'ascending') {
-            characters.sort((a, b) => (a.name > b.name) ? 1 : -1)
-            event.target.value = 'descending'
+            const ascend = [...characters].sort((a, b) => (a.name > b.name) ? 1 : -1);
+            setCharacters(ascend);
+            //setCharacters(characters.sort((a, b) => (a.name > b.name) ? 1 : -1))
+            event.target.value = 'descending';
         } else {
-            characters.sort((a, b) => (a.name < b.name) ? 1 : -1)
-            event.target.value = 'ascending'
+            const descend = [...characters].sort((a, b) => (a.name < b.name) ? 1 : -1);
+            setCharacters(descend);
+            //characters.sort((a, b) => (a.name < b.name) ? 1 : -1)
+            event.target.value = 'ascending';
         }
     }
-
-    /*function sort(event) {
-        if (event.target.value === 'ascending') {
-            characters.sort((a, b) => (a.name > b.name) ? 1 : -1)
-            event.target.value = 'descending'
-        } else {
-            characters.sort((a, b) => (a.name < b.name) ? 1 : -1)
-            event.target.value = 'ascending'
-        }
-    }*/
 
     const handleQuery = (event) => {
         if (event.key === 'Enter') {
