@@ -3,7 +3,7 @@ import axios from "axios";
 
 function Characters() {
     const [characters, setCharacters] = useState([]);
-    const [filteredCharacters, setFilteredCharacters] = useState([])
+    const [filteredCharacters, setFilteredCharacters] = useState([]);
 
     useEffect(() => {
         axios
@@ -12,10 +12,12 @@ function Characters() {
                     Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
                 },
             })
-            .then((response) => setCharacters(response.data.docs))
+            .then((response) => {
+                    setFilteredCharacters(response.data.docs)
+                    setCharacters(response.data.docs)
+                }
+            )
     }, []);
-    console.log(filteredCharacters)
-
 
     const flexContainerStyle = {
         display: "flex",
@@ -33,46 +35,37 @@ function Characters() {
 
     const sorter = (event) => {
         if (event.target.value === 'ascending') {
-            setCharacters([...characters].sort((a, b) => (a.name > b.name) ? 1 : -1));
+            setFilteredCharacters([...characters].sort((a, b) => (a.name > b.name) ? 1 : -1));
             event.target.value = 'descending';
         } else {
-            setCharacters([...characters].sort((a, b) => (a.name < b.name) ? 1 : -1));
+            setFilteredCharacters([...characters].sort((a, b) => (a.name < b.name) ? 1 : -1));
             event.target.value = 'ascending';
         }
     }
 
     const handleQuery = (event) => {
-        filterCharacter(event.target.value)
-      /*  if (event.key === 'Enter') {
-        }*/
-    }
-
-    /*  function filterCharacter(fieldInput) {
-          const filteredChar = characters.filter(item => item.name === fieldInput)
-          setCharacters(filteredChar)
-      }*/
-
-    function filterCharacter(fieldInput) {
-        const searchedChar = characters.filter(item => item.name === fieldInput)
-        if (fieldInput === '') {
-            setFilteredCharacters(characters)
-        } else {
+        const fieldInput = event.target.value
+        const searchedChar = characters.filter(item => item.name.includes(fieldInput))
+        if (fieldInput !== '') {
             setFilteredCharacters(searchedChar)
+        } else {
+            setFilteredCharacters(characters)
         }
     }
 
-    const listCharacters = filteredCharacters.map((item) => (
-        <div style={cardStyle} key={item._id}>
-            {item.name} <br/>
-            {item.birth} <br/>
-            {item.death} <br/>
-            {item.gender} <br/>
-            {item.race} <br/>
-            <a href={item.wikiUrl} target="_blank">
-                {item.wikiUrl}
-            </a>
-        </div>
-    ));
+    const listCharacters =
+        filteredCharacters.map((item) => (
+            <div style={cardStyle} key={item._id}>
+                {item.name} <br/>
+                {item.birth} <br/>
+                {item.death} <br/>
+                {item.gender} <br/>
+                {item.race} <br/>
+                <a href={item.wikiUrl} target="_blank">
+                    {item.wikiUrl}
+                </a>
+            </div>
+        ));
 
     return <React.Fragment>
         <button onClick={sorter} value={'ascending'}>Sort by name</button>
@@ -82,6 +75,5 @@ function Characters() {
         </div>
     </React.Fragment>
 }
-
 
 export default Characters;
