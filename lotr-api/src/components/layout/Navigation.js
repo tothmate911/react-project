@@ -73,7 +73,7 @@ export default function Navigation() {
         },
       })
       .then((response) => setBooks(response.data.docs));
-  });
+  }, []);
   console.log(books);
   const bookList = books.map((item) => (
     <Link key={item._id} to={"/book/" + item._id}>
@@ -89,7 +89,7 @@ export default function Navigation() {
         },
       })
       .then((response) => setMovies(response.data.docs));
-  });
+  }, []);
   console.log(movies);
   const movieList = movies.map((item) => (
     <Link key={item._id} to={"/movie/" + item._id}>
