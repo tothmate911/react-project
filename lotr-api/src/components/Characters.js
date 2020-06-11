@@ -30,14 +30,10 @@ function Characters() {
 
     const sorter = (event) => {
         if (event.target.value === 'ascending') {
-            const ascend = [...characters].sort((a, b) => (a.name > b.name) ? 1 : -1);
-            setCharacters(ascend);
-            //setCharacters(characters.sort((a, b) => (a.name > b.name) ? 1 : -1))
+            setCharacters([...characters].sort((a, b) => (a.name > b.name) ? 1 : -1));
             event.target.value = 'descending';
         } else {
-            const descend = [...characters].sort((a, b) => (a.name < b.name) ? 1 : -1);
-            setCharacters(descend);
-            //characters.sort((a, b) => (a.name < b.name) ? 1 : -1)
+            setCharacters([...characters].sort((a, b) => (a.name < b.name) ? 1 : -1));
             event.target.value = 'ascending';
         }
     }
