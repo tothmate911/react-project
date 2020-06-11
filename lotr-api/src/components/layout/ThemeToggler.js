@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { DataContext } from "../../context/DataContext";
+import styled from "styled-components";
 
-const themeTogglerStyle = {
-  padding: "30px",
-  cursor: "pointer",
-};
+const ThemeTogglerStyle = styled.div`
+  padding-right: 30px;
+  padding-top: 20px;
+  cursor: pointer;
+`;
 
 const ThemeToggler = () => {
   const [theme, setTheme] = useContext(ThemeContext);
@@ -19,9 +21,9 @@ const ThemeToggler = () => {
   };
 
   return (
-    <div style={themeTogglerStyle} onClick={toggleTheme}>
+    <ThemeTogglerStyle onClick={toggleTheme}>
       <span title="switch theme">{theme === "light" ? "🌙" : "☀️"}</span>
-    </div>
+    </ThemeTogglerStyle>
   );
 };
 

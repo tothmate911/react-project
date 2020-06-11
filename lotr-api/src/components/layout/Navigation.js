@@ -9,7 +9,6 @@ import AppTheme from "./Colors";
 const NavBar = styled.div`
   height: 120px;
   background-color: ${(props) => props.bgColor};
-  margin-right: 60px;
 `;
 
 const NavLink = styled(Link)`
@@ -43,7 +42,7 @@ const DropdownContent = styled.div`
 const Button = styled.div`
   position: relative;
   display: inline-block;
-  width: 180px;
+  width: 160px;
   height: 120px;
   background-color: ${(props) => props.bgColor};
   color: ${(props) => props.color};
