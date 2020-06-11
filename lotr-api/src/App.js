@@ -1,11 +1,12 @@
-import React from "react";
-import "./css/App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Characters from "./components/pages/Characters";
-import Header from "./components/layout/Header";
-import MainPage from "./components/pages/MainPage";
-import Movie from "./components/pages/Movie";
-import styled from "styled-components";
+import React from 'react';
+import './css/App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Characters from './components/pages/Characters';
+import Header from './components/layout/Header';
+import MainPage from './components/pages/MainPage';
+import Movie from './components/pages/Movie';
+import styled from 'styled-components';
+import Book from './components/pages/Book';
 
 const Main = styled.div`
   margin-top: 20px;
@@ -16,7 +17,7 @@ const Main = styled.div`
   padding: 40px;
 `;
 
-function App() {
+const App = (props) => {
   return (
     <div>
       <Router>
@@ -25,10 +26,11 @@ function App() {
         <Main>
           <Route exact path="/characters" component={Characters} />
           <Route path="/movie/:id" component={Movie} />
+          <Route path="/book/:id" component={Book} />
         </Main>
       </Router>
     </div>
   );
-}
+};
 
 export default App;
