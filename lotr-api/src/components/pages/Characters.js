@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import { ThemeContext } from '../../context/ThemeContext';
 import AppTheme from '../layout/Colors';
 
@@ -33,8 +35,29 @@ function Characters() {
     borderRadius: '5px',
   };
 
-  const iter = characters.map((item) => (
-    <div style={cardStyle}>
+  const sorter = (event) => {
+    if (event.target.value === 'ascending') {
+      setCharacters([...characters].sort((a, b) => (a.name > b.name ? 1 : -1)));
+      event.target.value = 'descending';
+    } else {
+      setCharacters([...characters].sort((a, b) => (a.name < b.name ? 1 : -1)));
+      event.target.value = 'ascending';
+    }
+  };
+
+  const handleQuery = (event) => {
+    if (event.key === 'Enter') {
+      filterCharacter(event.target.value);
+    }
+  };
+
+  function filterCharacter(fieldInput) {
+    const filteredChar = characters.filter((item) => item.name === fieldInput);
+    setCharacters(filteredChar);
+  }
+
+  const listCharacters = characters.map((item) => (
+    <div style={cardStyle} key={item._id}>
       {item.name} <br />
       {item.birth} <br />
       {item.death} <br />
@@ -44,10 +67,23 @@ function Characters() {
         {item.wikiUrl}
       </a>
     </div>
-    //<li key={item.id}>{item.name}</li>
   ));
 
-  return <div style={flexContainerStyle}>{iter}</div>;
+  return (
+    <React.Fragment>
+      <button onClick={sorter} value={'ascending'}>
+        Sort by name
+      </button>
+      <input
+        onKeyPress={handleQuery}
+        name="inputField"
+        type="text"
+        placeholder="Search..."
+        defaultValue={''}
+      />
+      <div style={flexContainerStyle}>{listCharacters}</div>
+    </React.Fragment>
+  );
 }
 
 export default Characters;
