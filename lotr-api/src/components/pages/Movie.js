@@ -1,30 +1,35 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-
-const Border = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-left-style: solid !important;
-  border-left: 5px;
-  border-color: #555;
-  color: #555;
-  padding-left: 15px;
-`;
-
-const Icon = styled.span`
-  font-size: 1.4em;
-  margin-right: 10px;
-`;
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import { ThemeContext } from '../../context/ThemeContext';
+import AppTheme from '../layout/Colors';
 
 const Movie = (props) => {
+  const [theme] = useContext(ThemeContext);
+  const currentTheme = AppTheme[theme];
+
+  const Border = styled.div`
+    display: flex;
+    flex-direction: column;
+    border-left-style: solid !important;
+    border-left: 5px;
+    border-color: ${currentTheme.movieColor};
+    color: ${currentTheme.movieColor};
+    padding-left: 15px;
+  `;
+
+  const Icon = styled.span`
+    font-size: 1.4em;
+    margin-right: 10px;
+  `;
+
   const { id } = useParams();
   console.log(id);
 
   const [movie, setMovie] = useState([]);
 
-  const accessToken = "fkvjn1Y4mQl3SasgncEO";
+  const accessToken = 'fkvjn1Y4mQl3SasgncEO';
 
   const getMovieRequest = (movieUrl) => {
     console.log(`sending HTTP request to ${movieUrl}`);
