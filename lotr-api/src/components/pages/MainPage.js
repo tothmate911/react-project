@@ -5,7 +5,7 @@ import trailer from "./trailer.mp4";
 const Background = styled.div`
   background-color: black;
   position: fixed;
-  top: 120;
+  top: 120px;
   left: 0;
   min-width: 100%;
   min-height: 100%;

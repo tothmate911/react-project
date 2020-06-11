@@ -42,8 +42,8 @@ const App = (props) => {
       <Router>
         <ContainerStyle>
           <Header />
-          <Route exact path="/" component={MainPage} />
           <Main>
+            <Route exact path="/" component={MainPage} />
             <Route exact path="/characters" component={Characters} />
             <Route path="/character/:id" component={Character} />
             <Route path="/movie/:id" component={Movie} />
