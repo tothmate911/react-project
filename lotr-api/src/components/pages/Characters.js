@@ -3,7 +3,7 @@ import axios from "axios";
 
 function Characters() {
     const [characters, setCharacters] = useState([]);
-    const [filteredChars, setFilteredChars] = useState([])
+    const [filteredCharacters, setFilteredCharacters] = useState([])
 
     useEffect(() => {
         axios
@@ -12,8 +12,10 @@ function Characters() {
                     Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
                 },
             })
-            .then((response) => setCharacters(response.data.docs));
+            .then((response) => setCharacters(response.data.docs))
     }, []);
+    console.log(filteredCharacters)
+
 
     const flexContainerStyle = {
         display: "flex",
@@ -40,21 +42,26 @@ function Characters() {
     }
 
     const handleQuery = (event) => {
-        if (event.key === 'Enter') {
-            filterCharacter(event.target.value)
-        }
+        filterCharacter(event.target.value)
+      /*  if (event.key === 'Enter') {
+        }*/
     }
+
+    /*  function filterCharacter(fieldInput) {
+          const filteredChar = characters.filter(item => item.name === fieldInput)
+          setCharacters(filteredChar)
+      }*/
 
     function filterCharacter(fieldInput) {
-        const filteredChar = characters.filter(item => item.name === fieldInput)
+        const searchedChar = characters.filter(item => item.name === fieldInput)
         if (fieldInput === '') {
-            setFilteredChars(characters)
+            setFilteredCharacters(characters)
         } else {
-            setFilteredChars(filteredChar)
+            setFilteredCharacters(searchedChar)
         }
     }
 
-    const listCharacters = filteredChars.map((item) => (
+    const listCharacters = filteredCharacters.map((item) => (
         <div style={cardStyle} key={item._id}>
             {item.name} <br/>
             {item.birth} <br/>
@@ -69,7 +76,7 @@ function Characters() {
 
     return <React.Fragment>
         <button onClick={sorter} value={'ascending'}>Sort by name</button>
-        <input onKeyPress={handleQuery} name='inputField' type="text" placeholder='Search...' defaultValue={''}/>
+        <input onChange={handleQuery} name='inputField' type="text" placeholder='Search...'/>
         <div style={flexContainerStyle}>
             {listCharacters}
         </div>
