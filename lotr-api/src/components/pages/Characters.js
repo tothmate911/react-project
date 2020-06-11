@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { DataContext } from "../../context/DataContext";
 
 function Characters() {
+  const dataContext = useContext(DataContext);
   const [characters, setCharacters] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
 
@@ -16,6 +18,8 @@ function Characters() {
       .then((response) => {
         setFilteredCharacters(response.data.docs);
         setCharacters(response.data.docs);
+        console.log(characters);
+        console.log("bubububububububcucucucu");
       });
   }, []);
 
