@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 function Characters() {
     const [characters, setCharacters] = useState([]);
@@ -17,7 +18,7 @@ function Characters() {
                     setCharacters(response.data.docs)
                 }
             )
-    }, []);
+    }   , []);
 
     const flexContainerStyle = {
         display: "flex",
@@ -44,8 +45,8 @@ function Characters() {
     }
 
     const handleQuery = (event) => {
-        const fieldInput = event.target.value
-        const searchedChar = characters.filter(item => item.name.includes(fieldInput))
+        const fieldInput = event.target.value.toLowerCase()
+        const searchedChar = characters.filter(item => item.name.toLowerCase().includes(fieldInput))
         if (fieldInput !== '') {
             setFilteredCharacters(searchedChar)
         } else {
@@ -55,22 +56,17 @@ function Characters() {
 
     const listCharacters =
         filteredCharacters.map((item) => (
-            <div style={cardStyle} key={item._id}>
-                {item.name} <br/>
-                {item.birth} <br/>
-                {item.death} <br/>
-                {item.gender} <br/>
-                {item.race} <br/>
-                <a href={item.wikiUrl} target="_blank">
-                    {item.wikiUrl}
-                </a>
+            <div key={item._id}>
+                <Link to={`/character/${item._id}`}>
+                    <li>{item.name}</li>
+                </Link>
             </div>
         ));
 
     return <React.Fragment>
         <button onClick={sorter} value={'ascending'}>Sort by name</button>
         <input onChange={handleQuery} name='inputField' type="text" placeholder='Search...'/>
-        <div style={flexContainerStyle}>
+        <div>
             {listCharacters}
         </div>
     </React.Fragment>
