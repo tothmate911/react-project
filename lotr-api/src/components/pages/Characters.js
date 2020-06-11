@@ -8,19 +8,32 @@ function Characters() {
   const [characters, setCharacters] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
 
+  const getCharacters = () => {
+    if (!dataContext.isCharLoaded) {
+      axios
+        .get("https://the-one-api.herokuapp.com/v1/character", {
+          headers: {
+            Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+          },
+        })
+        .then((response) => {
+          setFilteredCharacters(response.data.docs);
+          setCharacters(response.data.docs);
+          dataContext.setCharacters(response.data.docs);
+          dataContext.setIsCharLoaded(true);
+        });
+    } else {
+      setCharacters(dataContext.characters);
+      setFilteredCharacters(dataContext.characters);
+    }
+  };
+
+  const fetchData = () => {
+    getCharacters();
+  };
+
   useEffect(() => {
-    axios
-      .get("https://the-one-api.herokuapp.com/v1/character", {
-        headers: {
-          Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
-        },
-      })
-      .then((response) => {
-        setFilteredCharacters(response.data.docs);
-        setCharacters(response.data.docs);
-        console.log(characters);
-        console.log("bubububububububcucucucu");
-      });
+    fetchData();
   }, []);
 
   /*    const flexContainerStyle = {
@@ -70,6 +83,10 @@ function Characters() {
     </div>
   ));
 
+  let charContainer = <span></span>;
+  if (dataContext.isCharLoaded) {
+    charContainer = listCharacters;
+  }
   return (
     <React.Fragment>
       <button onClick={sorter} value={"ascending"}>
@@ -81,7 +98,7 @@ function Characters() {
         type="text"
         placeholder="Search..."
       />
-      <div>{listCharacters}</div>
+      <div>{charContainer}</div>
     </React.Fragment>
   );
 }

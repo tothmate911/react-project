@@ -15,6 +15,7 @@ const ThemeToggler = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
     dataContext.setIsBookLoaded(false);
     dataContext.setIsMovieLoaded(false);
+    dataContext.setIsCharLoaded(false);
   };
 
   return (

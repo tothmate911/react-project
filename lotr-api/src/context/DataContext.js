@@ -9,9 +9,8 @@ export const DataContextProvider = (props) => {
   const [movieMenu, setMovieMenu] = useState([]);
   const [isMovieLoaded, setIsMovieLoaded] = useState(false);
 
-  const [books, setBooks] = useState([]);
-  const [movies, setMovies] = useState([]);
   const [characters, setCharacters] = useState([]);
+  const [isCharLoaded, setIsCharLoaded] = useState(false);
 
   return (
     <DataContext.Provider
@@ -24,6 +23,10 @@ export const DataContextProvider = (props) => {
         setMovieMenu,
         isMovieLoaded,
         setIsMovieLoaded,
+        characters,
+        setCharacters,
+        isCharLoaded,
+        setIsCharLoaded,
       }}
     >
       {props.children}
