@@ -2,13 +2,12 @@ import React, {useEffect, useState} from "react";
 import axios from 'axios'
 import styled from "styled-components";
 
-
 function Character() {
     const [character, setCharacter] = useState([]);
 
     const getIdFromWindowUrl = () => {
-        const splittedUrl = window.location.href.split('/')
-        return splittedUrl[splittedUrl.length - 1];
+        const splitUrl = window.location.href.split('/')
+        return splitUrl[splitUrl.length - 1];
     }
 
     useEffect(() => {
@@ -21,8 +20,6 @@ function Character() {
             .then((response) => setCharacter(response.data)
             )
     }, []);
-    console.log('character: ', character)
-
 
     const Border = styled.div`
   display: flex;
@@ -38,7 +35,6 @@ function Character() {
   font-size: 1.4em;
   margin-right: 10px;
 `;
-
 
     return (
         <React.Fragment>
@@ -64,9 +60,7 @@ function Character() {
                 </p>
             </Border>
         </React.Fragment>
-
     )
-
 }
 
 export default Character;
