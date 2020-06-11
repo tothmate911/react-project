@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const NavBar = styled.div`
   height: 120px;
@@ -67,32 +67,32 @@ export default function Navigation() {
 
   useEffect(() => {
     axios
-      .get("https://the-one-api.herokuapp.com/v1/book", {
+      .get('https://the-one-api.herokuapp.com/v1/book', {
         headers: {
-          Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+          Authorization: 'Bearer pmF8BDZT97okBAtf7_Ui',
         },
       })
       .then((response) => setBooks(response.data.docs));
   }, []);
   console.log(books);
   const bookList = books.map((item) => (
-    <Link key={item._id} to={"/book/" + item._id}>
+    <Link key={item._id} to={'/book/' + item._id}>
       {item.name}
     </Link>
   ));
 
   useEffect(() => {
     axios
-      .get("https://the-one-api.herokuapp.com/v1/movie", {
+      .get('https://the-one-api.herokuapp.com/v1/movie', {
         headers: {
-          Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+          Authorization: 'Bearer pmF8BDZT97okBAtf7_Ui',
         },
       })
       .then((response) => setMovies(response.data.docs));
   }, []);
   console.log(movies);
   const movieList = movies.map((item) => (
-    <Link key={item._id} to={"/movie/" + item._id}>
+    <Link key={item._id} to={'/movie/' + item._id}>
       {item.name}
     </Link>
   ));
