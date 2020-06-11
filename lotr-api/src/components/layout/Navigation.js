@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ThemeContext } from '../../context/ThemeContext';
+import { DataContext } from "../../context/DataContext";
 import AppTheme from './Colors';
 
 export default function Navigation() {
@@ -67,50 +68,87 @@ export default function Navigation() {
     }
   `;
 
-  const [books, setBooks] = useState([]);
-  const [movies, setMovies] = useState([]);
+export default function Navigation() {
+  const dataContext = useContext(DataContext);
+  const [bookMenu, setBookMenu] = useState([]);
+  const [movieMenu, setMovieMenu] = useState([]);
+  const [bookList, setBookList] = useState([]);
+  const [movieList, setMovieList] = useState([]);
+
+  const getBooks = () => {
+    if (!dataContext.isBookLoaded) {
+      axios
+        .get("https://the-one-api.herokuapp.com/v1/book", {
+          headers: {
+            Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+          },
+        })
+        .then((response) => {
+          setBookMenu(response.data.docs);
+          dataContext.setBookMenu(response.data.docs);
+          setBookList(
+            bookMenu.map((item) => (
+              <Link key={item._id} to={"/book/" + item._id}>
+                {item.name}
+              </Link>
+            ))
+          );
+          dataContext.setIsBookLoaded(true);
+        });
+    } else {
+      setBookMenu(dataContext.bookMenu);
+    }
+  };
+
+  const getMovies = () => {
+    if (!dataContext.isMovieLoaded) {
+      axios
+        .get("https://the-one-api.herokuapp.com/v1/movie", {
+          headers: {
+            Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+          },
+        })
+        .then((response) => {
+          setMovieMenu(response.data.docs);
+          dataContext.setMovieMenu(response.data.docs);
+          setMovieList(
+            movieMenu.map((item) => (
+              <Link key={item._id} to={"/movie/" + item._id}>
+                {item.name}
+              </Link>
+            ))
+          );
+          dataContext.setIsMovieLoaded(true);
+        });
+    } else {
+      setMovieMenu(dataContext.movieMenu);
+    }
+  };
+
+  const fetchData = () => {
+    getBooks();
+    getMovies();
+  };
 
   useEffect(() => {
-    axios
-      .get('https://the-one-api.herokuapp.com/v1/book', {
-        headers: {
-          Authorization: 'Bearer pmF8BDZT97okBAtf7_Ui',
-        },
-      })
-      .then((response) => setBooks(response.data.docs));
-  }, []);
-  console.log(books);
-  const bookList = books.map((item) => (
-    <Link key={item._id} to={'/book/' + item._id}>
-      {item.name}
-    </Link>
-  ));
+    fetchData();
+  }, [bookList, movieList]);
 
-  useEffect(() => {
-    axios
-      .get('https://the-one-api.herokuapp.com/v1/movie', {
-        headers: {
-          Authorization: 'Bearer pmF8BDZT97okBAtf7_Ui',
-        },
-      })
-      .then((response) => setMovies(response.data.docs));
-  }, []);
-  console.log(movies);
-  const movieList = movies.map((item) => (
-    <Link key={item._id} to={'/movie/' + item._id}>
-      {item.name}
-    </Link>
-  ));
-
+  let books = <span></span>;
+  let movies = <span></span>;
+  if (dataContext.isBookLoaded && dataContext.isMovieLoaded) {
+    books = bookList;
+    movies = movieList;
+  }
   return (
     <NavBar>
       <Button>
         <ButtonTitle>BOOKS</ButtonTitle>
-        <DropdownContent>{bookList}</DropdownContent>
+        <DropdownContent>{books}</DropdownContent>
       </Button>
       <Button>
         <ButtonTitle>MOVIES</ButtonTitle>
-        <DropdownContent>{movieList}</DropdownContent>
+        <DropdownContent>{movies}</DropdownContent>
       </Button>
       <Button>
         <NavLink to="/characters">

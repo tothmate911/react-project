@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
 
 const BookContainer = styled.div`
   display: grid;
@@ -15,7 +15,7 @@ const Book = () => {
   const [chapters, setChapters] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const accessToken = 'fkvjn1Y4mQl3SasgncEO';
+  const accessToken = "fkvjn1Y4mQl3SasgncEO";
 
   const getBookRequest = (bookUrl) => {
     console.log(`sending HTTP request to ${bookUrl}`);
@@ -79,8 +79,8 @@ const Book = () => {
 };
 
 const bookImageStyle = {
-  maxHeight: '300px',
-  width: 'auto',
+  maxHeight: "300px",
+  width: "auto",
 };
 
 export default Book;

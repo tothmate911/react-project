@@ -4,14 +4,17 @@ import './css/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from './context/ThemeContext';
+import { DataContextProvider } from "./context/DataContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <DataContextProvider>
+        <App />
+      </DataContextProvider>
     </ThemeProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
