@@ -20,13 +20,10 @@ const Icon = styled.span`
 
 const Movie = (props) => {
   const { id } = useParams();
-  console.log(id);
-
   const [movie, setMovie] = useState([]);
 
-  const accessToken = "fkvjn1Y4mQl3SasgncEO";
-
   const getMovieRequest = (movieUrl) => {
+    const accessToken = "fkvjn1Y4mQl3SasgncEO";
     console.log(`sending HTTP request to ${movieUrl}`);
     return axios
       .get(movieUrl, {
@@ -38,9 +35,8 @@ const Movie = (props) => {
   };
 
   useEffect(() => {
-    console.log(id);
     const movieUrl = `https://the-one-api.herokuapp.com/v1/movie/${id}`;
-    const movieRequest = getMovieRequest(movieUrl);
+    getMovieRequest(movieUrl);
   }, [id]);
 
   return (
@@ -49,31 +45,31 @@ const Movie = (props) => {
       <Border>
         <p>
           <Icon>
-            <i class="fas fa-star"></i>
+            <i className="fas fa-star"></i>
           </Icon>
           Academy Award Nominations: {movie.academyAwardNominations}
         </p>
         <p>
           <Icon>
-            <i class="fas fa-trophy"></i>
+            <i className="fas fa-trophy"></i>
           </Icon>
           Academy Award Wins: {movie.academyAwardWins}
         </p>
         <p>
           <Icon>
-            <i class="fas fa-money-bill"></i>
+            <i className="fas fa-money-bill"></i>
           </Icon>
           Box Office Revenue: {movie.boxOfficeRevenueInMillions} millions
         </p>
         <p>
           <Icon>
-            <i class="fas fa-wallet"></i>
+            <i className="fas fa-wallet"></i>
           </Icon>
           Budget: {movie.budgetInMillions} millions
         </p>
         <p>
           <Icon>
-            <i class="fas fa-clock"></i>
+            <i className="fas fa-clock"></i>
           </Icon>
           Runtime: {movie.runtimeInMinutes} minutes
         </p>
