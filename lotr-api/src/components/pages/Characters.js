@@ -3,6 +3,7 @@ import axios from "axios";
 
 function Characters() {
     const [characters, setCharacters] = useState([]);
+    const [filteredChars, setFilteredChars] = useState([])
 
     useEffect(() => {
         axios
@@ -46,10 +47,14 @@ function Characters() {
 
     function filterCharacter(fieldInput) {
         const filteredChar = characters.filter(item => item.name === fieldInput)
-        setCharacters(filteredChar)
+        if (fieldInput === '') {
+            setFilteredChars(characters)
+        } else {
+            setFilteredChars(filteredChar)
+        }
     }
 
-    const listCharacters = characters.map((item) => (
+    const listCharacters = filteredChars.map((item) => (
         <div style={cardStyle} key={item._id}>
             {item.name} <br/>
             {item.birth} <br/>
