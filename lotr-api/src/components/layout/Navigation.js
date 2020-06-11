@@ -1,67 +1,72 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
-const NavBar = styled.div`
-  height: 120px;
-  background-color: white;
-  margin-right: 60px;
-`;
-
-const NavLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  &:hover {
-    color: gray;
-    text-decoration: none;
-  }
-`;
-
-const DropdownContent = styled.div`
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0, 2);
-  z-index: 1;
-  margin-top: 20px;
-  & a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  & a:hover {
-    background-color: #ddd;
-  }
-`;
-
-const Button = styled.div`
-  position: relative;
-  display: inline-block;
-  width: 180px;
-  height: 120px;
-  background-color: white;
-  color: black;
-  font-size: 16px;
-  border: none;
-  &:hover {
-    color: gray;
-  }
-  &:hover ${DropdownContent} {
-    display: block;
-  }
-`;
-
-const ButtonTitle = styled.div`
-  margin-top: 80px;
-  &:hover ${DropdownContent} {
-    display: block;
-  }
-`;
+import { ThemeContext } from '../../context/ThemeContext';
+import AppTheme from './Colors';
 
 export default function Navigation() {
+  const [theme] = useContext(ThemeContext);
+  const currentTheme = AppTheme[theme];
+
+  const NavBar = styled.div`
+    height: 120px;
+    background-color: ${currentTheme.backgroundColor};
+    margin-right: 60px;
+  `;
+
+  const NavLink = styled(Link)`
+    text-decoration: none;
+    color: ${currentTheme.textColor};
+    &:hover {
+      color: gray;
+      text-decoration: none;
+    }
+  `;
+
+  const DropdownContent = styled.div`
+    display: none;
+    position: absolute;
+    background-color: ${currentTheme.dropDownBackgroundColor};
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0, 2);
+    z-index: 1;
+    margin-top: 20px;
+    & a {
+      color: ${currentTheme.textColor};
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    & a:hover {
+      background-color: ${currentTheme.dropDownBackgroundHoverColor};
+    }
+  `;
+
+  const Button = styled.div`
+    position: relative;
+    display: inline-block;
+    width: 180px;
+    height: 120px;
+    background-color: ${currentTheme.backgroundColor};
+    color: ${currentTheme.textColor};
+    font-size: 16px;
+    border: none;
+    &:hover {
+      color: gray;
+    }
+    &:hover ${DropdownContent} {
+      display: block;
+    }
+  `;
+
+  const ButtonTitle = styled.div`
+    margin-top: 80px;
+    &:hover ${DropdownContent} {
+      display: block;
+    }
+  `;
+
   const [books, setBooks] = useState([]);
   const [movies, setMovies] = useState([]);
 
