@@ -8,7 +8,7 @@ const BookContainer = styled.div`
   grid-template-columns: 240px auto;
 `;
 
-const Book = (props) => {
+const Book = () => {
   const { id } = useParams();
 
   const [book, setBook] = useState([]);

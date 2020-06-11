@@ -1,15 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './css/index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import { ThemeProvider } from './context/ThemeContext';
 import { DataContextProvider } from "./context/DataContext";
-import "./css/index.css";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <DataContextProvider>
-      <App />
-    </DataContextProvider>
+    <ThemeProvider>
+      <DataContextProvider>
+        <App />
+      </DataContextProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

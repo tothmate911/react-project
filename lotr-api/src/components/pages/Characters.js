@@ -1,48 +1,52 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import { ThemeContext } from '../../context/ThemeContext';
+import AppTheme from '../layout/Colors';
 
 function Characters() {
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://the-one-api.herokuapp.com/v1/character", {
+      .get('https://the-one-api.herokuapp.com/v1/character', {
         headers: {
-          Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+          Authorization: 'Bearer pmF8BDZT97okBAtf7_Ui',
         },
       })
-      .then((response) => {
-        setCharacters(response.data.docs);
-        console.log(response.data.docs);
-      });
+      .then((response) => setCharacters(response.data.docs));
   }, []);
 
+  const [theme] = useContext(ThemeContext);
+  const currentTheme = AppTheme[theme];
+
   const flexContainerStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    backgroundColor: "lightGrey",
+    display: 'flex',
+    flexWrap: 'wrap',
+    backgroundColor: 'lightGrey',
   };
 
   const cardStyle = {
-    backgroundColor: "#f1f1f1",
-    margin: "1%",
-    padding: "1%",
-    fontSize: "100%",
-    borderRadius: "5px",
+    backgroundColor: `${currentTheme.dropDownBackgroundColor}`,
+    margin: '1%',
+    padding: '1%',
+    fontSize: '100%',
+    borderRadius: '5px',
   };
 
   const sorter = (event) => {
-    if (event.target.value === "ascending") {
+    if (event.target.value === 'ascending') {
       setCharacters([...characters].sort((a, b) => (a.name > b.name ? 1 : -1)));
-      event.target.value = "descending";
+      event.target.value = 'descending';
     } else {
       setCharacters([...characters].sort((a, b) => (a.name < b.name ? 1 : -1)));
-      event.target.value = "ascending";
+      event.target.value = 'ascending';
     }
   };
 
   const handleQuery = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       filterCharacter(event.target.value);
     }
   };
@@ -67,7 +71,7 @@ function Characters() {
 
   return (
     <React.Fragment>
-      <button onClick={sorter} value={"ascending"}>
+      <button onClick={sorter} value={'ascending'}>
         Sort by name
       </button>
       <input
@@ -75,7 +79,7 @@ function Characters() {
         name="inputField"
         type="text"
         placeholder="Search..."
-        defaultValue={""}
+        defaultValue={''}
       />
       <div style={flexContainerStyle}>{listCharacters}</div>
     </React.Fragment>
