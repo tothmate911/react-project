@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './css/App.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Characters from './components/pages/Characters';
@@ -57,6 +57,7 @@ const App = (props) => {
       </Router>
     </div>
   );
-};
+}
+}
 
 export default App;
