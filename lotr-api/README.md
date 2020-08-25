@@ -4,7 +4,7 @@
 
 ![Front Page](public/home_page.jpg?raw=true "Front Page")
 
-This web application provides you with some information about The Lord of the Rings franchise. You can learn about the books, movies and the characters.
+This web application provides you with some information about The Lord of the Rings franchise. You can learn about the books, movies and the characters, also you can change the theme from light to dark.
 
 We wanted to build this application to practice React. Because we are fans of the franchise, we chose [The Lord of the Rings open API](https://the-one-api.herokuapp.com/documentation) to work with.
 
