@@ -4,20 +4,11 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { ThemeContext } from "../../context/ThemeContext";
 import AppTheme from "../layout/Colors";
+import Border from "../layout/Border";
 
 const Movie = (props) => {
   const [theme] = useContext(ThemeContext);
   const currentTheme = AppTheme[theme];
-
-  const Border = styled.div`
-    display: flex;
-    flex-direction: column;
-    border-left-style: solid !important;
-    border-left: 5px;
-    border-color: ${currentTheme.movieColor};
-    color: ${currentTheme.movieColor};
-    padding-left: 15px;
-  `;
 
   const Icon = styled.span`
     font-size: 1.4em;
@@ -47,7 +38,7 @@ const Movie = (props) => {
   return (
     <React.Fragment>
       <h1>{movie.name}</h1>
-      <Border>
+      <Border color={currentTheme.movieColor}>
         <p>
           <Icon>
             <i className="fas fa-star"></i>

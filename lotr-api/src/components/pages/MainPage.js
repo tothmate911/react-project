@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import trailer from "./trailer.mp4";
+import trailer from "../layout/trailer.mp4";
 
 const Background = styled.div`
   background-color: black;
@@ -22,11 +22,27 @@ const Video = styled.video`
 const Content = styled.div`
   position: fixed;
   bottom: 0;
+  z-index: 1;
   background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+`;
+
+const Gradient = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 35%,
+    rgba(0, 0, 0, 0) 100%
+  );
 `;
 
 function MainPage() {
@@ -38,6 +54,8 @@ function MainPage() {
         <Video id={vidRef} autoPlay muted loop>
           <source src={trailer} type="video/mp4" />
         </Video>
+        <Gradient />
+
         <Content>
           <h1>Lord of the Rings Trilogy</h1>
           <p>

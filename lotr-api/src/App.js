@@ -24,6 +24,7 @@ const App = (props) => {
     left: 0;
     right: 0;
     min-height: 100%;
+    color: ${currentTheme.textColor};
   `;
 
   const Main = styled.div`

@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
-const Border = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-left-style: solid !important;
-  border-left: 5px;
-  border-color: #555;
-  color: #555;
-  padding-left: 15px;
-`;
+import AppTheme from "../layout/Colors";
+import { ThemeContext } from "../../context/ThemeContext";
+import Border from "../layout/Border";
 
 const Icon = styled.span`
   font-size: 1.4em;
@@ -18,6 +11,8 @@ const Icon = styled.span`
 `;
 
 function Character() {
+  const [theme] = useContext(ThemeContext);
+  const currentTheme = AppTheme[theme];
   const [character, setCharacter] = useState([]);
 
   const getIdFromWindowUrl = () => {
@@ -38,25 +33,29 @@ function Character() {
   return (
     <React.Fragment>
       <h1>{character.name}</h1>
-      <Border>
+      <Border color={currentTheme.movieColor}>
         <p>
           <Icon>
             <i className="fas fa-yin-yang"></i>
           </Icon>
           <i>Gender: </i>
-          {character.gender ? character.gender : "-"}
+          {character.gender && !isNaN(character.gender)
+            ? character.gender
+            : "-"}
         </p>
         <p>
           <Icon>
             <i className="fas fa-frog"></i>
           </Icon>
-          <i>Race: </i> {character.race ? character.race : "-"}
+          <i>Race: </i>{" "}
+          {character.race && !isNaN(character.gender) ? character.race : "-"}
         </p>
         <p>
           <Icon>
             <i className="fas fa-chess-rook"></i>
           </Icon>
-          <i>Realm: </i> {character.realm ? character.realm : "-"}
+          <i>Realm: </i>{" "}
+          {character.realm && !isNaN(character.gender) ? character.realm : "-"}
         </p>
       </Border>
     </React.Fragment>
