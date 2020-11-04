@@ -15,7 +15,7 @@ const Book = () => {
   const [chapters, setChapters] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const accessToken = "fkvjn1Y4mQl3SasgncEO";
+  const accessToken = "HVyql6qHzMTbJ1oJNo-5";
 
   const getBookRequest = (bookUrl) => {
     console.log(`sending HTTP request to ${bookUrl}`);
@@ -42,7 +42,7 @@ const Book = () => {
   const fetchData = () => {
     setIsLoading(true);
 
-    const bookUrl = `https://the-one-api.herokuapp.com/v1/book/${id}`;
+    const bookUrl = `https://the-one-api.dev/v2/book/${id}`;
     const bookRequest = getBookRequest(bookUrl);
 
     const chapterUrl = `${bookUrl}/chapter`;

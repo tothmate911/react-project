@@ -74,9 +74,9 @@ export default function Navigation() {
   const getBooks = () => {
     if (!dataContext.isBookLoaded) {
       axios
-        .get("https://the-one-api.herokuapp.com/v1/book", {
+        .get("https://the-one-api.dev/v2/book", {
           headers: {
-            Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+            Authorization: "Bearer HVyql6qHzMTbJ1oJNo-5",
           },
         })
         .then((response) => {
@@ -99,9 +99,9 @@ export default function Navigation() {
   const getMovies = () => {
     if (!dataContext.isMovieLoaded) {
       axios
-        .get("https://the-one-api.herokuapp.com/v1/movie", {
+        .get("https://the-one-api.dev/v2/movie", {
           headers: {
-            Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+            Authorization: "Bearer HVyql6qHzMTbJ1oJNo-5",
           },
         })
         .then((response) => {

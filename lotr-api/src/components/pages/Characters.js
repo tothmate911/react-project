@@ -11,9 +11,9 @@ function Characters() {
   const getCharacters = () => {
     if (!dataContext.isCharLoaded) {
       axios
-        .get("https://the-one-api.herokuapp.com/v1/character", {
+        .get("https://the-one-api.dev/v2/character", {
           headers: {
-            Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
+            Authorization: "Bearer HVyql6qHzMTbJ1oJNo-5",
           },
         })
         .then((response) => {

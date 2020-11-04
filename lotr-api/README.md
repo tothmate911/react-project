@@ -6,13 +6,13 @@
 
 This web application provides you with some information about The Lord of the Rings franchise. You can learn about the books, movies and the characters, also you can change the theme from light to dark.
 
-We wanted to build this application to practice React. Because we are fans of the franchise, we chose [The Lord of the Rings open API](https://the-one-api.herokuapp.com/documentation) to work with.
+We wanted to build this application to practice React. Because we are fans of the franchise, we chose [The Lord of the Rings open API](https://the-one-api.dev/documentation) to work with.
 
 ### Our General Goals
 
 - Software design
 - Layout design
-- Provide an interactive frontend app for [the LOTR API](https://the-one-api.herokuapp.com/documentation)
+- Provide an interactive frontend app for [the LOTR API](https://the-one-api.dev/documentation)
 
 ### Our Technical Goals
 

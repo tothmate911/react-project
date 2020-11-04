@@ -27,15 +27,12 @@ function Character() {
 
   useEffect(() => {
     axios
-      .get(
-        `https://the-one-api.herokuapp.com/v1/character/${getIdFromWindowUrl()}`,
-        {
-          headers: {
-            Authorization: "Bearer pmF8BDZT97okBAtf7_Ui",
-          },
-        }
-      )
-      .then((response) => setCharacter(response.data));
+      .get(`https://the-one-api.dev/v2/character/${getIdFromWindowUrl()}`, {
+        headers: {
+          Authorization: "Bearer HVyql6qHzMTbJ1oJNo-5",
+        },
+      })
+      .then((response) => setCharacter(response.data.docs[0]));
   }, []);
 
   return (
@@ -47,19 +44,19 @@ function Character() {
             <i className="fas fa-yin-yang"></i>
           </Icon>
           <i>Gender: </i>
-          {character.gender}
+          {character.gender ? character.gender : "-"}
         </p>
         <p>
           <Icon>
             <i className="fas fa-frog"></i>
           </Icon>
-          <i>Race: </i> {character.race}
+          <i>Race: </i> {character.race ? character.race : "-"}
         </p>
         <p>
           <Icon>
             <i className="fas fa-chess-rook"></i>
           </Icon>
-          <i>Realm: </i> {character.realm}
+          <i>Realm: </i> {character.realm ? character.realm : "-"}
         </p>
       </Border>
     </React.Fragment>

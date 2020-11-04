@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import { ThemeContext } from '../../context/ThemeContext';
-import AppTheme from '../layout/Colors';
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import { ThemeContext } from "../../context/ThemeContext";
+import AppTheme from "../layout/Colors";
 
 const Movie = (props) => {
   const [theme] = useContext(ThemeContext);
@@ -28,19 +28,19 @@ const Movie = (props) => {
   const [movie, setMovie] = useState([]);
 
   const getMovieRequest = (movieUrl) => {
-    const accessToken = "fkvjn1Y4mQl3SasgncEO";
+    const accessToken = "HVyql6qHzMTbJ1oJNo-5";
     console.log(`sending HTTP request to ${movieUrl}`);
     return axios
       .get(movieUrl, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((res) => {
-        setMovie(res.data);
+        setMovie(res.data.docs[0]);
       });
   };
 
   useEffect(() => {
-    const movieUrl = `https://the-one-api.herokuapp.com/v1/movie/${id}`;
+    const movieUrl = `https://the-one-api.dev/v2/movie/${id}`;
     getMovieRequest(movieUrl);
   }, [id]);
 
