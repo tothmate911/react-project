@@ -74,19 +74,6 @@ function Characters() {
     fetchData();
   }, []);
 
-  /*    const flexContainerStyle = {
-        display: "flex",
-        flexWrap: "wrap",
-        backgroundColor: "lightGrey",
-    };
-    const cardStyle = {
-        backgroundColor: "#f1f1f1",
-        margin: "1%",
-        padding: "1%",
-        fontSize: "100%",
-        borderRadius: "5px",
-    };*/
-
   const sorter = (event) => {
     if (event.target.value === "ascending") {
       setFilteredCharacters(

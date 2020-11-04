@@ -20,7 +20,6 @@ const Movie = (props) => {
 
   const getMovieRequest = (movieUrl) => {
     const accessToken = "HVyql6qHzMTbJ1oJNo-5";
-    console.log(`sending HTTP request to ${movieUrl}`);
     return axios
       .get(movieUrl, {
         headers: { Authorization: `Bearer ${accessToken}` },

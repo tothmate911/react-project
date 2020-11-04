@@ -8,6 +8,15 @@ const BookContainer = styled.div`
   grid-template-columns: 240px auto;
 `;
 
+const ChapterList = styled.ol`
+  margin: 0;
+  padding: 0 0 0 18px;
+`;
+
+const ListItem = styled.li`
+  margin: 10px;
+`;
+
 const Book = () => {
   const { id } = useParams();
 
@@ -18,18 +27,16 @@ const Book = () => {
   const accessToken = "HVyql6qHzMTbJ1oJNo-5";
 
   const getBookRequest = (bookUrl) => {
-    console.log(`sending HTTP request to ${bookUrl}`);
     return axios
       .get(bookUrl, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((res) => {
-        setBook(res.data);
+        setBook(res.data.docs[0]);
       });
   };
 
   const getChapterRequest = (chapterUrl) => {
-    console.log(`sending HTTP request to ${chapterUrl}`);
     return axios
       .get(chapterUrl, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -38,6 +45,11 @@ const Book = () => {
         setChapters(res.data.docs);
       });
   };
+
+  let listOfChapters = "";
+  listOfChapters = chapters.map((chapter) => (
+    <ListItem>{chapter.chapterName}</ListItem>
+  ));
 
   const fetchData = () => {
     setIsLoading(true);
@@ -59,19 +71,24 @@ const Book = () => {
 
   if (!isLoading) {
     content = (
-      <BookContainer>
-        <div>
-          <img
-            style={bookImageStyle}
-            src={`/bookImage/${id}.jpg`}
-            alt={book.name}
-          ></img>
-        </div>
-        <div>
-          <h2>{book.name}</h2>
-          <p>Number of chapters: {chapters.length}</p>
-        </div>
-      </BookContainer>
+      <React.Fragment>
+        <h1>{book.name}</h1>
+        <BookContainer>
+          <div>
+            <img
+              style={bookImageStyle}
+              src={`/bookImage/${id}.jpg`}
+              alt={book.name}
+            ></img>
+          </div>
+          <div>
+            <div>
+              <b>Chapters:</b>
+            </div>
+            <ChapterList>{listOfChapters}</ChapterList>
+          </div>
+        </BookContainer>
+      </React.Fragment>
     );
   }
 
